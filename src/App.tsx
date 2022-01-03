@@ -1,13 +1,31 @@
 import * as React from "react";
 
-// 1. import `ChakraProvider` component
+import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
+import {
+  HomeScreen,
+  ProfileScreen,
+  TokenDetailsScreen,
+  TokenCollectionScreen,
+} from "./components/screens";
+import { Layout } from "./components/layout";
 
 const App = () => {
-  // 2. Wrap ChakraProvider at the root of your app
   return (
     <ChakraProvider>
-      <div>Hello world</div>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomeScreen />} />
+            <Route path="/collection" element={<TokenCollectionScreen />} />
+            <Route path="token">
+              <Route path=":tokenId" element={<TokenDetailsScreen />} />
+            </Route>
+            <Route path="/token" element={<HomeScreen />} />
+            <Route path="profile" element={<ProfileScreen />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
     </ChakraProvider>
   );
 };
