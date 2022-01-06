@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Container,
   Flex,
@@ -7,6 +8,7 @@ import {
   Stack,
   useColorModeValue,
   SimpleGrid,
+  Button,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { TokenImage } from "../tokens";
@@ -16,6 +18,7 @@ import { truncateAddress } from "../../utils/formatter";
 export const TokenDetailsScreen = () => {
   let { tokenId } = useParams();
 
+  const [truncateDisplay, setTruncateDisplay] = useState(true);
   const { loading: isLoading, token } = useTokenById(Number(tokenId));
 
   return (
@@ -26,7 +29,15 @@ export const TokenDetailsScreen = () => {
         <Flex direction="row" mt={6}>
           <TokenImage image={token?.image} />
           <Stack direction="column" ml={8} spacing={2}>
-            <Box>Owned by {truncateAddress(token.owner)}</Box>
+            <Box>
+              Owned by{" "}
+              <Button
+                variant="link"
+                onClick={() => setTruncateDisplay(!truncateDisplay)}
+              >
+                {truncateDisplay ? truncateAddress(token.owner) : token.owner}
+              </Button>
+            </Box>
             <Heading>{token.name}</Heading>
 
             {token.description && (
