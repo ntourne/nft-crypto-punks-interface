@@ -2,19 +2,14 @@ import { useEffect, useCallback } from "react";
 import {
   Flex,
   Button,
-  Tag,
-  TagLabel,
-  Badge,
-  TagCloseButton,
-  Text,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
   MenuDivider,
+  Text,
 } from "@chakra-ui/react";
 import { connector } from "../../config/web3";
-import { Link } from "react-router-dom";
 import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
 import { useTruncatedAddress, useEthBalance } from "../../hooks";
 
@@ -89,6 +84,7 @@ const WalletBalance = (props: any) => {
         </MenuButton>
         <MenuList>
           <MenuItem>{truncatedAddress}</MenuItem>
+          <MenuItem>{loading ? "-" : <Text>~{balance} Ξ</Text>}</MenuItem>
           <MenuDivider />
           <MenuItem onClick={onDisconnect}>Disconnect</MenuItem>
         </MenuList>

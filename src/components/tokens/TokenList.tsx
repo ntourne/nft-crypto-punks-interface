@@ -4,7 +4,6 @@ import {
   SimpleGrid,
   Container,
   Text,
-  Stack,
   Skeleton,
 } from "@chakra-ui/react";
 import { TokenBox } from ".";
