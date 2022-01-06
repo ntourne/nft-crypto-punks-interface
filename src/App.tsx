@@ -2,13 +2,7 @@ import * as React from "react";
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import {
   HomeScreen,
   ProfileScreen,

@@ -60,6 +60,7 @@ const WalletBalance = (props: any) => {
   const truncatedAddress = useTruncatedAddress(account);
   const { balance, loading } = useEthBalance();
 
+  /*
   const _button = (
     <Tag colorScheme="green">
       <TagLabel>
@@ -78,6 +79,7 @@ const WalletBalance = (props: any) => {
       <TagCloseButton onClick={onDisconnect} />
     </Tag>
   );
+  */
 
   return (
     <Flex direction="row">
