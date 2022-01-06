@@ -73,7 +73,7 @@ export const Navbar = () => {
           flex={{ base: 1, md: 0 }}
           justify={"flex-end"}
           direction={"row"}
-          spacing={6}
+          spacing={2}
         >
           <MintBox />
           <WalletData />

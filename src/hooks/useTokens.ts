@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { IToken } from "../interfaces";
-import { useCryptoPunkContract } from ".";
+import { useCryptoPunkContract } from "./useCryptoPunkContract";
 
 export const useTokens = () => {
 

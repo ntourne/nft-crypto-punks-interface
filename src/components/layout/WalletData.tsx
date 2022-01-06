@@ -1,17 +1,10 @@
 import { useEffect, useCallback } from "react";
-import {
-  Flex,
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  Text,
-} from "@chakra-ui/react";
+import { Flex, Button, Text } from "@chakra-ui/react";
 import { connector } from "../../config/web3";
 import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
-import { useTruncatedAddress, useEthBalance } from "../../hooks";
+import { useEthBalance } from "../../hooks";
+import { truncateAddress } from "../../utils/formatter";
+import { CloseIcon } from "@chakra-ui/icons";
 
 export const WalletData = () => {
   const { activate, account, active, deactivate, error } = useWeb3React();
@@ -52,43 +45,28 @@ export const WalletData = () => {
 
 const WalletBalance = (props: any) => {
   const { account, onDisconnect } = props;
-  const truncatedAddress = useTruncatedAddress(account);
   const { balance, loading } = useEthBalance();
-
-  /*
-  const _button = (
-    <Tag colorScheme="green">
-      <TagLabel>
-        <Link to={`/punks?address=${account}`}>{truncatedAddress}</Link>
-      </TagLabel>
-      <Badge
-        d={{
-          base: "none",
-          md: "block",
-        }}
-        variant="solid"
-        ml={1}
-      >
-        {loading ? "-" : <Text>~{balance} Ξ</Text>}
-      </Badge>
-      <TagCloseButton onClick={onDisconnect} />
-    </Tag>
-  );
-  */
 
   return (
     <Flex direction="row">
-      <Menu>
-        <MenuButton as={Button} variant={"link"} cursor={"pointer"} minW={0}>
-          Account
-        </MenuButton>
-        <MenuList>
-          <MenuItem>{truncatedAddress}</MenuItem>
-          <MenuItem>{loading ? "-" : <Text>~{balance} Ξ</Text>}</MenuItem>
-          <MenuDivider />
-          <MenuItem onClick={onDisconnect}>Disconnect</MenuItem>
-        </MenuList>
-      </Menu>
+      <Button borderRightRadius={0} pr={1}>
+        {truncateAddress(account)}{" "}
+        <Text
+          as="span"
+          fontWeight="bold"
+          bgColor="gray.400"
+          borderRadius="6px"
+          ml={2}
+          py={1}
+          px={2}
+          color="white"
+        >
+          {loading ? "..." : <Text>~{balance} Ξ</Text>}
+        </Text>
+      </Button>
+      <Button onClick={onDisconnect} borderLeftRadius={0}>
+        <CloseIcon />
+      </Button>
     </Flex>
   );
 };
