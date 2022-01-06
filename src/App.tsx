@@ -1,7 +1,14 @@
 import * as React from "react";
 
-import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
 import {
   HomeScreen,
   ProfileScreen,
@@ -10,22 +17,27 @@ import {
 } from "./components/screens";
 import { Layout } from "./components/layout";
 
+// Create a client
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
     <ChakraProvider>
-      <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<HomeScreen />} />
-            <Route path="/collection" element={<TokenCollectionScreen />} />
-            <Route path="token">
-              <Route path=":tokenId" element={<TokenDetailsScreen />} />
-            </Route>
-            <Route path="/token" element={<HomeScreen />} />
-            <Route path="profile" element={<ProfileScreen />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomeScreen />} />
+              <Route path="/collection" element={<TokenCollectionScreen />} />
+              <Route path="token">
+                <Route path=":tokenId" element={<TokenDetailsScreen />} />
+              </Route>
+              <Route path="/token" element={<HomeScreen />} />
+              <Route path="profile" element={<ProfileScreen />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </QueryClientProvider>
     </ChakraProvider>
   );
 };

@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 import {
   Container,
   Flex,
@@ -12,21 +10,13 @@ import {
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { TokenImage } from "../tokens";
-import { TOKENS } from "../../data";
-import { IToken } from "../../interfaces";
+import { useTokenById } from "../../hooks";
+import { truncateAddress } from "../../utils/formatter";
 
 export const TokenDetailsScreen = () => {
-  const [token, setToken] = useState<IToken | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(true);
   let { tokenId } = useParams();
 
-  useEffect(() => {
-    const _token: any = TOKENS.find(
-      (tokenItem: any) => tokenItem.tokenId === Number(tokenId)
-    );
-    if (_token) setToken(_token);
-    setIsLoading(false);
-  }, [tokenId]);
+  const { loading: isLoading, token } = useTokenById(Number(tokenId));
 
   return (
     <Container maxW={"7xl"}>
@@ -36,7 +26,7 @@ export const TokenDetailsScreen = () => {
         <Flex direction="row" mt={6}>
           <TokenImage image={token?.image} />
           <Stack direction="column" ml={8} spacing={2}>
-            <Box>Owned by 0x</Box>
+            <Box>Owned by {truncateAddress(token.owner)}</Box>
             <Heading>{token.name}</Heading>
 
             {token.description && (

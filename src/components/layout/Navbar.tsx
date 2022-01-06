@@ -3,7 +3,6 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
@@ -21,6 +20,8 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+import { WalletData } from "./WalletData";
+import { MintBox } from "../tokens";
 
 export const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
@@ -53,13 +54,15 @@ export const Navbar = () => {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
-          >
-            Crypto Punks
-          </Text>
+          <Link to={"/"}>
+            <Text
+              textAlign={useBreakpointValue({ base: "center", md: "left" })}
+              fontWeight="bold"
+              color={useColorModeValue("gray.800", "white")}
+            >
+              Crypto Punks
+            </Text>
+          </Link>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
@@ -72,13 +75,8 @@ export const Navbar = () => {
           direction={"row"}
           spacing={6}
         >
-          <Button
-            display={{ base: "none", md: "inline-flex" }}
-            fontWeight={600}
-            variant="solid"
-          >
-            Connect Wallet
-          </Button>
+          <MintBox />
+          <WalletData />
         </Stack>
       </Flex>
 
@@ -90,8 +88,8 @@ export const Navbar = () => {
 };
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("gray.800", "white");
+  // const linkColor = useColorModeValue("gray.600", "gray.200");
+  // const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   /*

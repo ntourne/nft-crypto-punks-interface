@@ -3,5 +3,6 @@ export interface IToken {
     image: string;
     name: string;
     description: string;
+    owner: string;
     attributes: [{ trait_type: string, value: string }]
 }

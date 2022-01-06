@@ -1,17 +1,11 @@
 import {
   Container,
   Stack,
-  Flex,
   Box,
   Heading,
   Text,
-  Button,
-  Image,
   Icon,
-  IconButton,
-  createIcon,
   IconProps,
-  useColorModeValue,
 } from "@chakra-ui/react";
 
 export const Hero = ({ rightComponent }: any) => {
@@ -27,7 +21,7 @@ export const Hero = ({ rightComponent }: any) => {
           <Heading
             lineHeight={1.1}
             fontWeight={600}
-            fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}
+            fontSize={{ base: "3xl", sm: "3xl", lg: "5xl" }}
           >
             <Text as={"span"} position={"relative"}>
               Get your Crypto Punk
@@ -59,7 +53,7 @@ export const Hero = ({ rightComponent }: any) => {
             </Box>
           </Box>
         </Stack>
-        <Flex
+        {/* <Flex
           flex={1}
           justify={"center"}
           align={"center"}
@@ -68,6 +62,7 @@ export const Hero = ({ rightComponent }: any) => {
         >
           {rightComponent}
         </Flex>
+        */}
       </Stack>
     </Container>
   );

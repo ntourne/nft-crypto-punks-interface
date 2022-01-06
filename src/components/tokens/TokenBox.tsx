@@ -8,9 +8,12 @@ import {
 import { TokenImage } from ".";
 import { Link } from "react-router-dom";
 import { IToken } from "../../interfaces";
+import { useTruncatedAddress } from "../../hooks";
 
 export const TokenBox = ({ token }: { token: IToken }) => {
-  const { tokenId, name, image } = token;
+  const { tokenId, name, image, owner } = token;
+
+  const truncatedOwner = useTruncatedAddress(owner);
   return (
     <Center py={2}>
       <Box
@@ -24,16 +27,16 @@ export const TokenBox = ({ token }: { token: IToken }) => {
         pos={"relative"}
         zIndex={1}
       >
-        <Link to={`token/${tokenId}`}>
+        <Link to={`/token/${tokenId}`}>
           <TokenImage image={image} />
         </Link>
         <Stack pt={6} align={"left"}>
-          <Link to={`token/${tokenId}`}>
+          <Link to={`/token/${tokenId}`}>
             <Heading fontSize={"lg"} fontFamily={"body"} fontWeight={500}>
               {name}
             </Heading>
           </Link>
-          <Box>Owned by 0x</Box>
+          <Box>Owned by {truncatedOwner}</Box>
           {/*
           <Stack direction={"row"} align={"center"}>
             <Text fontWeight={800} fontSize={"xl"}>

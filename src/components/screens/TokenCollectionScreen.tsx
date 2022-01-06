@@ -1,7 +1,6 @@
 import { Container, Flex } from "@chakra-ui/react";
 
-import { Hero } from "../landing";
-import { MintBox, TokenList } from "../tokens";
+import { TokenList } from "../tokens";
 
 export const TokenCollectionScreen = () => {
   return (
