@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
 
-function App() {
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import {
+  HomeScreen,
+  ProfileScreen,
+  TokenDetailsScreen,
+  TokenCollectionScreen,
+} from "./components/screens";
+import { Layout } from "./components/layout";
+
+// Create a client
+const queryClient = new QueryClient();
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomeScreen />} />
+              <Route path="/collection" element={<TokenCollectionScreen />} />
+              <Route path="token">
+                <Route path=":tokenId" element={<TokenDetailsScreen />} />
+              </Route>
+              <Route path="/token" element={<HomeScreen />} />
+              <Route path="profile" element={<ProfileScreen />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </ChakraProvider>
   );
-}
+};
 
 export default App;
